@@ -8,6 +8,11 @@
 #define MDIA 2 // media keys
 #define GAME 3 // game layer
 
+#define PREVENT_STUCK_MODIFIERS
+#define PERMISSIVE_HOLD
+#undef TAPPING_TERM
+#define TAPPING_TERM 150
+
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
@@ -33,8 +38,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | App  | LGui |       | Alt  |Ctrl/Esc|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
- *                                 | Space|Backsp|------|       |------|  Tab   |Space |
- *                                 |      |ace   | End  |       | PgDn |        |      |
+ *                                 |Backsp| Enter|------|       |------|  Tab   |Space |
+ *                                 |ace   |      | End  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -48,13 +53,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LSFT),  KC_LEFT,KC_RGHT,
                                               ALT_T(KC_APP),  KC_LGUI,
                                                               KC_HOME,
-                                               KC_SPC,KC_BSPC,KC_END,
+                                               KC_BSPC,KC_ENT,KC_END,
         // right hand
-             KC_LOCK,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
-             KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
-                          KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
-             TD(1),       KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
-                                  KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          MO(SYMB),
+        KC_LOCK,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
+        KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
+                     KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
+        TD(1),       KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
+                             KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          MO(SYMB),
              KC_LALT,        CTL_T(KC_ESC),
              KC_PGUP,
              KC_PGDN,KC_TAB, KC_SPC
