@@ -17,7 +17,7 @@
 #define PREVENT_STUCK_MODIFIERS
 #define PERMISSIVE_HOLD
 #undef TAPPING_TERM
-#define TAPPING_TERM 180
+#define TAPPING_TERM 190
 // #undef IGNORE_MOD_TAP_INTERRUPT
 
 // The default value for IS_COMMAND includes both shift keys, and that ends up
