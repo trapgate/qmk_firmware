@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | BkSp   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|' / Cmd |
  * |--------+------+------+------+------+------| [{(  |           | ]})  |------+------+------+------+------+--------|
- * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |//Ctrl| RShift |
+ * | LShift |Z/Ctrl|X/Alt |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  | ./Alt|//Ctrl| RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |Grv/L1| '/L2 |AltShf| Left | Right|                                       | Down |  Up  |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
                      KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
         TD(1),       KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
-                             KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          MO(SYMB),
+                             KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          OSL(SYMB),
              KC_LALT,        CTL_T(KC_ESC),
              KC_PGUP,
              KC_PGDN,KC_TAB, KC_SPC
@@ -83,10 +83,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = LAYOUT_ergodox(
        // left hand
-       VRSN,   KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_ESC,
-       _______,KC_EXLM,KC_AT,  KC_LCBR,KC_RCBR,KC_PIPE,_______,
-       _______,KC_HASH,KC_DLR, KC_LPRN,KC_RPRN,KC_GRV,
-       _______,KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,TG(GAME),
+       VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,
+       _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,
+       _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,
+       _______,CTL_T(KC_PERC),ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD, TG(GAME),
           EPRM,_______,_______,KC_LEFT,KC_RIGHT,
                                        RGB_MOD,_______,
                                                _______,
