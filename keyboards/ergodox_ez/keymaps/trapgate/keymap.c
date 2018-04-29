@@ -17,13 +17,20 @@ enum custom_keycodes {
   RGB_SLD
 };
 
+// Tapdance definitions
+enum dances {
+    DLFT = 0,   // left bracket/brace/paren
+    DRGHT,      // right bracket/brace/paren
+    DLAYR       // layer toggle
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   =    |   1  |   2  |   3  |   4  |   5  | Esc  |           | Lock |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Del    |   Q  |   W  |   E  |   R  |   T  | L1   |           | Enter|   Y  |   U  |   I  |   O  |   P  |   \    |
+ * | Del    |   Q  |   W  |   E  |   R  |   T  | LTD  |           | Enter|   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | BkSp   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|' / Cmd |
  * |--------+------+------+------+------+------| [{(  |           | ]})  |------+------+------+------+------+--------|
@@ -32,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |Grv/L1| '/L2 |AltShf| Left | Right|                                       | Down |  Up  |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | App  | LGui |       | Alt  |Ctrl/Esc|
+ *                                        |Alt/App|LGui |       | Alt  |Ctrl/Esc|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
  *                                 |Backsp| Enter|------|       |------|  Tab   |Space |
@@ -42,9 +49,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
         KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_ESC,
-        KC_DELT,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TG(SYMB),
+        KC_DELT,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TD(DLAYR),
         KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,  KC_B,   TD(0),
+        KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,  KC_B,   TD(DLFT),
         LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LSFT),  KC_LEFT,KC_RGHT,
                                               ALT_T(KC_APP),  KC_LGUI,
                                                               KC_HOME,
@@ -53,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LOCK,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
         KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
                      KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
-        TD(1),       KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
+        TD(DRGHT),   KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
                              KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          OSL(SYMB),
              KC_LALT,        CTL_T(KC_ESC),
              KC_PGUP,
@@ -62,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |Version  |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * |Version  |  F1  |  F2  |  F3  |  F4  |  F5  | ESC  |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         |   !  |   @  |   {  |   }  |   |  |      |           |      |   Up |   7  |   8  |   9  |   *  |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -86,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,
        _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,
        _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,
-       _______,CTL_T(KC_PERC),ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD, TG(GAME),
+       _______,CTL_T(KC_PERC),ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD, _______,
           EPRM,_______,_______,KC_LEFT,KC_RIGHT,
                                        RGB_MOD,_______,
                                                _______,
@@ -146,22 +153,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [GAME] = LAYOUT_ergodox(  // layer 3 : game layer
         // left hand
         KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_ESC,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_ENT,
+        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   _______,
         KC_LCTL,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   TO(BASE),
+        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_ENT,
         LT(SYMB,KC_GRV),KC_QUOT, LALT(KC_LSFT), KC_LEFT, KC_RGHT,
                                               ALT_T(KC_NO),   KC_LGUI,
                                                               KC_HOME,
-                                               KC_SPC,KC_BSPC,KC_END,
+                                                KC_SPC,KC_BSPC,KC_END,
         // right hand
-             _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
-             KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
-                          KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,          KC_QUOT,
-             _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,          KC_RSFT,
-                                  KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,          _______,
-             KC_LALT,        CTL_T(KC_ESC),
-             KC_PGUP,
-             KC_PGDN,KC_TAB, KC_SPC
+            _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,         KC_MINS,
+            KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,         KC_BSLS,
+                         KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,      KC_QUOT,
+            _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,      KC_RSFT,
+                                 KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,      _______,
+            KC_LALT,        CTL_T(KC_ESC),
+            KC_PGUP,
+            KC_PGDN,KC_TAB, KC_SPC
     ),
 
 };
@@ -170,25 +177,43 @@ const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
 
+void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
+{
+    if (state->count == 1) {
+        if (layer_state_is(0)) {
+            layer_on(SYMB);
+        } else {
+            layer_clear();
+        }
+    } else if (state->count == 2) {
+        layer_on(GAME);
+    }
+}
+
+void dance_lyr_reset(qk_tap_dance_state_t *state, void *user_data)
+{}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-    [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN)
+    [DLFT] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
+    [DRGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
+    // Set the active layer with a tap dance.
+    [DLAYR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lyr_finished, dance_lyr_reset)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-  // MACRODOWN only works in this function
-  switch(id) {
+    // MACRODOWN only works in this function
+    switch(id) {
     case 0:
-      if (record->event.pressed) {
-        SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-      }
-      break;
+        if (record->event.pressed) {
+            SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
+        }
+        break;
     case 1:
-      if (record->event.pressed) { // For resetting EEPROM
-        eeconfig_init();
-      }
-      break;
+        if (record->event.pressed) { // For resetting EEPROM
+            eeconfig_init();
+        }
+        break;
   }
   return MACRO_NONE;
 };
