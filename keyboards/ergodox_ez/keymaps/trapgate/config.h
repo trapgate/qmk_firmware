@@ -17,9 +17,11 @@
 #define PREVENT_STUCK_MODIFIERS
 #define PERMISSIVE_HOLD
 #undef TAPPING_TERM
-#define TAPPING_TERM 190
+#define TAPPING_TERM 200
 // #undef IGNORE_MOD_TAP_INTERRUPT
-
+// The default for debounce is 15, which can't be right. Trying much smaller value.
+#undef DEBOUNCE
+#define DEBOUNCE 3
 // The default value for IS_COMMAND includes both shift keys, and that ends up
 // getting tripped accidentally when holding right shift while hitting symbol
 // keys, which include left shift.
