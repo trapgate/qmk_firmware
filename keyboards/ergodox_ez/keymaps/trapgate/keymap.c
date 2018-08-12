@@ -3,10 +3,12 @@
 #include "action_layer.h"
 #include "version.h"
 
+// There are two base layers, BASE and GAME.
 #define BASE 0 // default layer
-#define SYMB 1 // symbols
-#define MDIA 2 // media keys
-#define GAME 3 // game layer
+#define GAME 1 // game layer
+// Two overlay layers, symbols and media keys/movement.
+#define SYMB 2 // symbols
+#define MDIA 3 // media keys
 
 #define _______ KC_TRNS
 
@@ -17,7 +19,7 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-// Tapdance definitions
+// Tapdance definitions.
 enum dances {
     DLFT = 0,   // left bracket/brace/paren
     DRGHT,      // right bracket/brace/paren
@@ -36,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------| [{(  |           | ]})  |------+------+------+------+------+--------|
  * | LShift |Z/Ctrl|X/Alt |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  | ./Alt|//Ctrl| RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |Grv/L1| '/L2 |AltShf| Left | Right|                                       | Down |  Up  |   [  |   ]  | ~L1  |
+ *   |Grv/L1| '/L2 |AltGui| Left | Right|                                       | Down |  Up  |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |Alt/App|LGui |       | Alt  |Ctrl/Esc|
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_DELT,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TD(DLAYR),
         KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,  KC_B,   TD(DLFT),
-        LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LSFT),  KC_LEFT,KC_RGHT,
+        LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LGUI),  KC_LEFT,KC_RGHT,
                                               ALT_T(KC_APP),  KC_LGUI,
                                                               KC_HOME,
                                                KC_BSPC,KC_ENT,KC_END,
@@ -66,6 +68,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_PGUP,
              KC_PGDN,KC_TAB, KC_SPC
     ),
+
+[GAME] = LAYOUT_ergodox(  // game layer
+        // left hand
+        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_ESC,
+        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   _______,
+        KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
+        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_ENT,
+        KC_LCTL,        KC_QUOT, LALT(KC_LSFT), KC_LEFT, KC_RGHT,
+                                              ALT_T(KC_NO),   KC_LGUI,
+                                                              KC_HOME,
+                                                KC_SPC,KC_ENT,KC_END,
+        // right hand
+            _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,         KC_MINS,
+            KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,         KC_BSLS,
+                         KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,      KC_QUOT,
+            _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,      KC_RSFT,
+                                 KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,      OSL(SYMB),
+            KC_LALT,        CTL_T(KC_ESC),
+            KC_PGUP,
+            KC_PGDN,KC_TAB, KC_SPC
+    ),
+
+
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
@@ -149,27 +174,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           _______,
           _______, RGB_HUD, RGB_HUI
 ),
-
-[GAME] = LAYOUT_ergodox(  // layer 3 : game layer
-        // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_ESC,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   _______,
-        KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_ENT,
-        KC_LCTL,        KC_QUOT, LALT(KC_LSFT), KC_LEFT, KC_RGHT,
-                                              ALT_T(KC_NO),   KC_LGUI,
-                                                              KC_HOME,
-                                                KC_SPC,KC_ENT,KC_END,
-        // right hand
-            _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,         KC_MINS,
-            KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,         KC_BSLS,
-                         KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,      KC_QUOT,
-            _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,      KC_RSFT,
-                                 KC_DOWN, KC_UP,KC_LBRC,KC_RBRC,      _______,
-            KC_LALT,        CTL_T(KC_ESC),
-            KC_PGUP,
-            KC_PGDN,KC_TAB, KC_SPC
-    ),
 
 };
 
