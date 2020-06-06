@@ -10,13 +10,11 @@
 #define SYMB 2 // symbols
 #define MDIA 3 // media keys
 
-#define _______ KC_TRNS
-
 enum custom_keycodes {
-  PLACEHOLDER = SAFE_RANGE, // can always be here
-  EPRM,
-  VRSN,
-  RGB_SLD
+    PLACEHOLDER = SAFE_RANGE, // can always be here
+    EPRM,
+    VRSN,
+    RGB_SLD
 };
 
 // Tapdance definitions.
@@ -44,51 +42,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |Alt/App|LGui |       | Alt  |Ctrl/Esc|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |Shift-| Home |       | PgUp |        |      |
- *                                 |Backsp| Tab  |------|       |------|  Tab   |Space |
- *                                 |ace   |      | End  |       | PgDn |        |      |
+ *                                 |Space | Tab  |------|       |------|  Tab   |Space |
+ *                                 |      |      | End  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
-[BASE] = LAYOUT_ergodox(  // layer 0 : default
-        // left hand
-        KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,     KC_5,   KC_ESC,
-        KC_DELT,        KC_Q,         KC_W,   KC_E,   KC_R,     KC_T,   TD(DLAYR),
-        KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,
-        KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,    KC_B,   TD(DLFT),
-        LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LGUI),    KC_LEFT,KC_RGHT,
-                                              ALT_T(KC_APP),    KC_LGUI,
-                                                                KC_HOME,
-                                              KC_BSPC,LSFT(KC_TAB),KC_END,
-        // right hand
-        KC_LOCK,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
-        KC_ENTER,    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
-                     KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
-        TD(DRGHT),   KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
-                             KC_DOWN, KC_UP,KC_LEFT,KC_RIGHT,   OSL(SYMB),
-             KC_LALT,        CTL_T(KC_ESC),
-             KC_PGUP,
-             KC_PGDN,KC_TAB, KC_SPC
-    ),
+[BASE] = LAYOUT_ergodox_pretty(  // layer 0 : default
+    KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,     KC_5,   KC_ESC,     KC_LOCK,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,       KC_MINS,
+    KC_DELT,        KC_Q,         KC_W,   KC_E,   KC_R,     KC_T,   TD(DLAYR),  KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,       KC_BSLS,
+    KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,                            KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
+    KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,    KC_B,   TD(DLFT),   TD(DRGHT),   KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
+    LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LGUI),    KC_LEFT,KC_RGHT,                         KC_DOWN, KC_UP,KC_LEFT,KC_RIGHT,   OSL(SYMB),
+                                          ALT_T(KC_APP),    KC_LGUI,            KC_LALT, CTL_T(KC_ESC),
+                                                            KC_HOME,            KC_PGUP,
+                                          KC_SPC,LSFT(KC_TAB),KC_END,           KC_PGDN, KC_TAB, KC_SPC
+),
 
-[GAME] = LAYOUT_ergodox(  // game layer
-        // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,     KC_5,   KC_ESC,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,     KC_T,   _______,
-        KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,     KC_B,   KC_ENT,
-        KC_LCTL,        KC_LALT,      MO(SYMB),       KC_LEFT,          KC_RGHT,
-                                              ALT_T(KC_NO),   KC_LGUI,
-                                                              KC_HOME,
-                                                KC_SPC,LSFT(KC_TAB),KC_END,
-        // right hand
-            _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,         KC_MINS,
-            KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,         KC_BSLS,
-                         KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,      KC_QUOT,
-            _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,      KC_RSFT,
-                                 KC_DOWN, KC_UP,KC_LEFT,KC_RIGHT,     OSL(SYMB),
-            KC_LALT,        CTL_T(KC_ESC),
-            KC_PGUP,
-            KC_PGDN,KC_TAB, KC_SPC
-    ),
+[GAME] = LAYOUT_ergodox_pretty(  // game layer
+    KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,     KC_5,   KC_ESC,     _______,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,       KC_MINS,
+    KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,     KC_T,   _______,    KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,       KC_BSLS,
+    KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,                            KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,    KC_QUOT,
+    KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,     KC_B,   KC_ENT,     _______,     KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,    KC_RSFT,
+    KC_LCTL,        KC_LALT,      MO(SYMB),       KC_LEFT,          KC_RGHT,                         KC_DOWN, KC_UP,KC_LEFT,KC_RIGHT,   OSL(SYMB),
+
+                                            ALT_T(KC_NO),   KC_LGUI,            KC_LALT, CTL_T(KC_ESC),
+                                                            KC_HOME,            KC_PGUP,
+                                            KC_SPC,LSFT(KC_TAB),KC_END,         KC_PGDN,KC_TAB, KC_SPC
+),
 
 
 /* Keymap 1: Symbol Layer
@@ -112,28 +91,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// SYMBOLS
-[SYMB] = LAYOUT_ergodox(
-       // left hand
-       VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,
-       _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,
-       _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,
-       _______,CTL_T(KC_PERC), ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD, _______,
-       _______,_______,_______,KC_LEFT,KC_RIGHT,
-                                           _______, _______,
-                                                    _______,
-                                  _______, _______, _______,
-       // right hand
-       _______,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
-       _______, KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
-                KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, _______,
-       _______, KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, _______,
-                         KC_0,   KC_COMM, KC_DOT,  KC_EQL,  _______,
-       _______, _______,
-       _______,
-       _______, _______, KC_WBAK
+[SYMB] = LAYOUT_ergodox_pretty(
+    VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,      _______,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,     _______,KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
+    _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,                        KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, _______,
+    _______,CTL_T(KC_PERC), ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD,_______,     _______,KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, _______,
+    _______,_______,_______,KC_LEFT,KC_RIGHT,                                                    KC_0,   KC_COMM, KC_DOT,  KC_EQL,  _______,
+                                                         _______, _______,      _______, _______,
+                                                                  _______,      _______,
+                                                _______, _______, _______,      _______, _______, KC_WBAK
 ),
+
 /* Keymap 2: Media and mouse keys
+ *
+ * This layer also has the RGB controls for the shine (RGBLIGHT_ENABLE) and the glow (RGB_MATRIX_ENABLE).
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |RESET |      |      |      |      |      |        |
@@ -154,31 +125,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// MEDIA AND MOUSE
-[MDIA] = LAYOUT_ergodox(
-       EPRM,    _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, KC_MS_U, _______, _______, _______,
-       _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, KC_BTN1, KC_BTN2,
-                                       RGB_MOD,_______,
-                                               _______,
-                               RGB_VAD,RGB_VAI,_______,
-    // right hand
-       RESET,    _______, _______, _______, _______, _______, _______,
-       _______,  _______, _______, _______, _______, _______, _______,
-                 KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, KC_MPLY,
-       _______,  _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-                          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
-          RGB_TOG, RGB_SLD,
-          _______,
-          _______, RGB_HUD, RGB_HUI
+[MDIA] = LAYOUT_ergodox_pretty(
+    EPRM,    _______, _______, _______, _______, _______, _______,      RESET,   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, KC_MS_U, _______, _______, _______,      _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, KC_MPLY,
+    _______, _______, _______, _______, _______, _______, _______,      _______, _______, _______, KC_MPRV, KC_MNXT, _______, _______,
+    _______, _______, _______, KC_BTN1, KC_BTN2,                                          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
+                                                 RGB_MOD, _______,      RGB_TOG, RGB_SLD,
+                                                          _______,      _______,
+                                          RGB_VAD,RGB_VAI,_______,      _______, RGB_HUD, RGB_HUI
 ),
 
-};
-
-const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
 
 void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
@@ -254,11 +211,6 @@ void matrix_init_user(void) {
 #ifdef RGBLIGHT_COLOR_LAYER_0
   rgblight_setrgb(RGBLIGHT_COLOR_LAYER_0);
 #endif
-};
-
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
-
 };
 
 // Runs whenever there is a layer state change.
