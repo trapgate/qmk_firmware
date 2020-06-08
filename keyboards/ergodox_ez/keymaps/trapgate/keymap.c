@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |Animat|      |       |Toggle|Solid |
+ *                                        |Animat|Speed |       |Toggle|Solid |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |Bright|Bright|      |       |      |Hue-  |Hue+  |
  *                                 |ness- |ness+ |------|       |------|      |      |
@@ -131,9 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, KC_MPLY,
     _______, _______, _______, _______, _______, _______, _______,      _______, _______, _______, KC_MPRV, KC_MNXT, _______, _______,
     _______, _______, _______, KC_BTN1, KC_BTN2,                                          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
-                                                 RGB_MOD, _______,      RGB_TOG, RGB_SLD,
+                                                 RGB_MOD, RGB_SPI,      RGB_TOG, RGB_SLD,
                                                           _______,      _______,
-                                          RGB_VAD,RGB_VAI,_______,      _______, RGB_HUD, RGB_HUI
+                                        RGB_VAD, RGB_VAI, _______,      _______, RGB_HUD, RGB_HUI
 ),
 
 };
