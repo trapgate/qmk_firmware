@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,                            KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
     KC_LSFT,        CTL_T(KC_Z),  ALT_T(KC_X),KC_C,KC_V,    KC_B,   TD(DLFT),   TD(DRGHT),   KC_N,   KC_M,  KC_COMM,ALT_T(KC_DOT), CTL_T(KC_SLSH),   KC_RSFT,
     LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),     LALT(KC_LGUI),    KC_LEFT,KC_RGHT,                         KC_DOWN, KC_UP,KC_LEFT,KC_RIGHT,   OSL(SYMB),
-                                          ALT_T(KC_APP),    KC_LGUI,            KC_LALT, CTL_T(KC_ESC),
+                                          ALT_T(KC_APP),    KC_LGUI,            KC_RALT, CTL_T(KC_ESC),
                                                             KC_HOME,            KC_PGUP,
                                           KC_SPC,LSFT(KC_TAB),KC_END,           KC_PGDN, KC_TAB, KC_SPC
 ),
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                             ALT_T(KC_NO),   KC_LGUI,            KC_LALT, CTL_T(KC_ESC),
                                                             KC_HOME,            KC_PGUP,
-                                            KC_SPC,LSFT(KC_TAB),KC_END,         KC_PGDN,KC_TAB, KC_SPC
+                                         KC_SPC,LSFT(KC_TAB),KC_END,            KC_PGDN,KC_TAB, KC_SPC
 ),
 
 
@@ -109,13 +109,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |RESET |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      | MsUp |      |      |      |           |      |      | Home |  Up  | PgUp |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------| Left | Down |  Up  | Right|      |  Play  |
+ * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      | Left | Down | Right|      |  Play  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+ * |        |      |      |      |      |      |      |           |      |      | End  |      | PgDn |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
+ *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute | Prev | Next |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |Animat|Speed |       |Toggle|Solid |
@@ -127,10 +127,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [MDIA] = LAYOUT_ergodox_pretty(
     EPRM,    _______, _______, _______, _______, _______, _______,      RESET,   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, KC_MS_U, _______, _______, _______,      _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,                        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, KC_MPLY,
-    _______, _______, _______, _______, _______, _______, _______,      _______, _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-    _______, _______, _______, KC_BTN1, KC_BTN2,                                          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
+    _______, _______, _______, KC_MS_U, _______, _______, _______,      _______, _______, KC_HOME, KC_UP,   KC_PGUP, _______, _______,
+    _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,                        _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, KC_MPLY,
+    _______, _______, _______, _______, _______, _______, _______,      _______, _______, KC_END,  _______, KC_PGDN, _______, _______,
+    _______, _______, _______, KC_BTN1, KC_BTN2,                                          KC_VOLU, KC_VOLD, KC_MUTE, KC_MPRV, KC_MNXT,
                                                  RGB_MOD, RGB_SPI,      RGB_TOG, RGB_SLD,
                                                           _______,      _______,
                                         RGB_VAD, RGB_VAI, _______,      _______, RGB_HUD, RGB_HUI
