@@ -3,6 +3,33 @@
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
 
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
+
+// Experiment:
+
+// Rolling is: ctrl down, x down, ctrl up, x up.
+// Reverse is: ctrl down, x down, x up, ctrl up.
+
+
+// TAPPING_TERM to 3000
+
+// !PERMISSIVE_HOLD && !IGNORE_MOD_TAP_INTERRUPT
+// Rolling: ctrl-x
+// Reverse: ctrl-x
+
+// !PERMISSIVE_HOLD && IGNORE_MOD_TAP_INTERRUPT
+// Rolling: zx
+// Reverse: ctrl-x
+
+// PERMISSIVE_HOLD && !IGNORE_MOD_TAP_INTERRUPT
+// Rolling: ctrl-x
+// Reverse: ctrl-x
+
+// PERMISSIVE_HOLD && IGNORE_MOD_TAP_INTERRUPT
+// Rolling: zx
+// Reverse: ctrl-x
+
 // The default value for IS_COMMAND includes both shift keys, and that ends up
 // getting tripped accidentally when holding right shift while hitting symbol
 // keys, which include left shift.
