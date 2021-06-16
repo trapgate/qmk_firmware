@@ -42,8 +42,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EQL,         KC_1,            KC_2,         KC_3,   KC_4,   KC_5, KC_ESC,    KC_LOCK,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,    KC_MINS,
         KC_DELT,        KC_Q,            KC_W,         KC_E,   KC_R,   KC_T, TD(DLAYR), KC_ENT,    KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,    KC_BSLS,
         KC_BSPC,        KC_A,            KC_S,         KC_D,   KC_F,   KC_G, TD(DLFT),  TD(DRGHT), KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
-        KC_LSFT,        CTL_T(KC_Z),     ALT_T(KC_X),  KC_C,   KC_V,   KC_B,                       KC_N,   KC_M,   KC_COMM,ALT_T(KC_DOT),   CTL_T(KC_SLSH),   KC_RSFT,
-        LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),LALT(KC_LGUI),KC_LEFT,KC_RGHT,KC_LGUI,                    KC_RALT,KC_DOWN,KC_UP,  KC_LEFT,KC_RIGHT,OSL(SYMB),
+        KC_LSFT,        CTL_T(KC_Z),   ALT_T(KC_X),  KC_C,   KC_V,   KC_B,                       KC_N,   KC_M,   KC_COMM,ALT_T(KC_DOT),CTL_T(KC_SLSH),KC_RSFT,
+        LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),LALT(KC_LGUI),KC_LEFT,KC_RGHT,KC_LGUI,                    KC_RALT,KC_DOWN,KC_UP,  KC_LEFT,OSL(MDIA),OSL(SYMB),
                                                                KC_TAB, KC_HOME, KC_END, KC_PGDN, KC_PGUP, KC_SPC
     ),
 
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,     KC_T,   _______,    KC_ENT,      KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,       KC_BSLS,
         KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,     KC_G,   KC_ENT,     _______,     KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,    KC_QUOT,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,     KC_B,                            KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,    KC_RSFT,
-        KC_LCTL,        KC_LALT,      MO(SYMB),KC_LEFT,KC_RGHT, _______,            _______,     KC_DOWN,KC_UP, KC_LEFT,KC_RIGHT,OSL(SYMB),
+        KC_LCTL,        KC_LALT,      MO(SYMB),KC_LEFT,KC_RGHT, _______,            _______,     KC_DOWN,KC_UP, KC_LEFT,OSL(MDIA),OSL(SYMB),
                                                       KC_SPC, KC_HOME, KC_END,      KC_PGDN, KC_PGUP, KC_SPC
     ),
 
@@ -62,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,   _______,     _______,KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, _______,
     _______,CTL_T(KC_PERC), ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD,                     KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, _______,
     _______,_______,_______,KC_LEFT,KC_RIGHT,  RGB_MOD,                                 RGB_TOG, KC_0,   KC_COMM, KC_DOT,  KC_EQL,  _______,
-                                               RGB_HUD, RGB_VAD,   _______,     TOGGLE_LAYER_COLOR,_______, _______
+                                               RGB_HUI,  RGB_VAI,   RGB_SPI,     TOGGLE_LAYER_COLOR,_______, _______
     ),
 
     [MDIA] = LAYOUT_moonlander(
-    EPRM,    _______, _______, _______, _______, _______, _______,      RESET,   _______, _______, _______, _______, _______, _______,
+    EPRM,    _______, _______, _______, _______, _______, RESET,        KC_PSCR, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, KC_MS_U, _______, _______, _______,      _______, _______, KC_HOME, KC_UP,   KC_PGUP, _______, _______,
     _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,      _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, KC_MPLY,
     _______, _______, _______, _______, _______, _______,                        _______, KC_END,  _______, KC_PGDN, _______, _______,
@@ -74,6 +74,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______, _______, _______,      _______, _______, _______
     ),
 };
+
+#ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (layer_state_is(GAME)) {
+        RGB_MATRIX_INDICATOR_SET_COLOR(16, 0xFF, 0x00, 0x00);  // E
+        RGB_MATRIX_INDICATOR_SET_COLOR(12, 0xFF, 0x00, 0x00);  // S
+        RGB_MATRIX_INDICATOR_SET_COLOR(17, 0xFF, 0x00, 0x00);  // D
+        RGB_MATRIX_INDICATOR_SET_COLOR(22, 0xFF, 0x00, 0x00);  // F
+        RGB_MATRIX_INDICATOR_SET_COLOR(32, 0xFF, 0x00, 0x00);  // F
+        RGB_MATRIX_INDICATOR_SET_COLOR(33, 0xFF, 0x00, 0x00);  // F
+        RGB_MATRIX_INDICATOR_SET_COLOR(34, 0xFF, 0x00, 0x00);  // F
+        RGB_MATRIX_INDICATOR_SET_COLOR(35, 0xFF, 0x00, 0x00);  // F
+    }
+
+    // if (userspace_config.rgb_layer_change) {
+    //     switch (get_highest_layer(layer_state|default_layer_state)) {
+    //         case _QWERTY:
+    //             rgb_matrix_layer_helper(HSV_CYAN, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _COLEMAK:
+    //             rgb_matrix_layer_helper(HSV_MAGENTA, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _DVORAK:
+    //             rgb_matrix_layer_helper(HSV_SPRINGGREEN, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _WORKMAN:
+    //             rgb_matrix_layer_helper(HSV_GOLDENROD, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _NORMAN:
+    //             rgb_matrix_layer_helper(HSV_CORAL, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _MALTRON:
+    //             rgb_matrix_layer_helper(HSV_YELLOW, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _EUCALYN:
+    //             rgb_matrix_layer_helper(HSV_PINK, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _CARPLAX:
+    //             rgb_matrix_layer_helper(HSV_BLUE, 0, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _GAMEPAD:
+    //             rgb_matrix_layer_helper(HSV_ORANGE, 1, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _DIABLO:
+    //             rgb_matrix_layer_helper(HSV_RED, 1, rgb_matrix_config.speed * 8, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _RAISE:
+    //             rgb_matrix_layer_helper(HSV_YELLOW, 1, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _LOWER:
+    //             rgb_matrix_layer_helper(HSV_GREEN, 1, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //         case _ADJUST:
+    //             rgb_matrix_layer_helper(HSV_RED, 1, rgb_matrix_config.speed, LED_FLAG_MODIFIER, led_min, led_max);
+    //             break;
+    //     }
+    // }
+}
+#endif
+
 
 void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
 {
