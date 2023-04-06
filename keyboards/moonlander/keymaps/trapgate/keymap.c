@@ -16,6 +16,7 @@
 
 
 #include QMK_KEYBOARD_H
+#include "g/keymap_combo.h"
 #include "version.h"
 
 enum layers {
@@ -40,7 +41,7 @@ enum dances {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_moonlander(
         KC_EQL,         KC_1,            KC_2,         KC_3,   KC_4,   KC_5, KC_ESC,    KC_CAPS,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,    KC_MINS,
-        KC_DELT,        KC_Q,            KC_W,         KC_E,   KC_R,   KC_T, TD(DLAYR), KC_ENT,    KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,    KC_BSLS,
+        KC_DEL,         KC_Q,            KC_W,         KC_E,   KC_R,   KC_T, TD(DLAYR), KC_ENT,    KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,    KC_BSLS,
         KC_BSPC,        KC_A,            KC_S,         KC_D,   KC_F,   KC_G, TD(DLFT),  TD(DRGHT), KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
         KC_LSFT,        CTL_T(KC_Z),     ALT_T(KC_X),  KC_C,   KC_V,   KC_B,                       KC_N,   KC_M,   KC_COMM,ALT_T(KC_DOT),CTL_T(KC_SLSH),KC_RSFT,
         LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),LALT(KC_LGUI),KC_LEFT,KC_RGHT,KC_LGUI,                    KC_RALT,KC_DOWN,KC_UP,  KC_LEFT,OSL(MDIA),OSL(SYMB),
@@ -57,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [SYMB] = LAYOUT_moonlander(
-        VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,      _______,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,      CMB_TOG,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
         _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,     _______,KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
         _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,   _______,     _______,KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, _______,
         _______,CTL_T(KC_PERC), ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD,                     KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, _______,
@@ -66,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [MDIA] = LAYOUT_moonlander(
-        EPRM,    _______, _______, _______, _______, _______, RESET,        KC_PSCR, _______, _______, _______, _______, _______, _______,
+        EPRM,    _______, _______, _______, _______, _______, QK_BOOT,      KC_PSCR, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, KC_MS_U, _______, _______, _______,      _______, _______, KC_HOME, KC_UP,   KC_PGUP, _______, _______,
         _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,      _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, KC_MPLY,
         _______, _______, _______, _______, _______, _______,                        _______, KC_END,  _______, KC_PGDN, _______, _______,
@@ -76,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (layer_state_is(GAME)) {
         RGB_MATRIX_INDICATOR_SET_COLOR(16, 0xFF, 0x00, 0x00);  // E
         RGB_MATRIX_INDICATOR_SET_COLOR(12, 0xFF, 0x00, 0x00);  // S
@@ -143,6 +144,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     //             break;
     //     }
     // }
+    return false;
 }
 #endif
 
@@ -157,6 +159,7 @@ void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
         }
     } else if (state->count == 2) {
         layer_on(GAME);
+        combo_disable();
     }
 }
 
@@ -168,24 +171,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [DRGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
     // Set the active layer with a tap dance.
     [DLAYR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lyr_finished, dance_lyr_reset)
-};
-
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
-{
-    // MACRODOWN only works in this function
-    switch(id) {
-    case 0:
-        if (record->event.pressed) {
-            SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-        }
-        break;
-    case 1:
-        if (record->event.pressed) { // For resetting EEPROM
-            eeconfig_init();
-        }
-        break;
-    }
-    return MACRO_NONE;
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {

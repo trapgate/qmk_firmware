@@ -22,6 +22,10 @@
 //#define PERMISSIVE_HOLD
 #define IGNORE_MOD_TAP_INTERRUPT
 
+#define COMBO_VARIABLE_LEN
+#define COMBO_STRICT_TIMER
+#define COMBO_TERM 20
+
 // Experiment:
 
 // Rolling is: ctrl down, x down, ctrl up, x up.
