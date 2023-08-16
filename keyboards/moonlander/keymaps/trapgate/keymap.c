@@ -27,7 +27,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    EPRM = ML_SAFE_RANGE,
+    EPRM = SAFE_RANGE,
     VRSN
 };
 
@@ -40,12 +40,12 @@ enum dances {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_moonlander(
-        KC_EQL,         KC_1,            KC_2,         KC_3,   KC_4,   KC_5, KC_ESC,    KC_CAPS,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,    KC_MINS,
+        KC_EQL,         KC_1,            KC_2,         KC_3,   KC_4,   KC_5, KC_ESC,    CW_TOGG,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,    KC_MINS,
         KC_DEL,         KC_Q,            KC_W,         KC_E,   KC_R,   KC_T, TD(DLAYR), KC_ENT,    KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,    KC_BSLS,
         KC_BSPC,        KC_A,            KC_S,         KC_D,   KC_F,   KC_G, TD(DLFT),  TD(DRGHT), KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),GUI_T(KC_QUOT),
         KC_LSFT,        CTL_T(KC_Z),     ALT_T(KC_X),  KC_C,   KC_V,   KC_B,                       KC_N,   KC_M,   KC_COMM,ALT_T(KC_DOT),CTL_T(KC_SLSH),KC_RSFT,
         LT(SYMB,KC_GRV),LT(MDIA,KC_QUOT),LALT(KC_LGUI),KC_LEFT,KC_RGHT,KC_LGUI,                    KC_RALT,KC_DOWN,KC_UP,  KC_LEFT,OSL(MDIA),OSL(SYMB),
-                                                               KC_TAB, KC_HOME, KC_END, KC_PGDN, KC_PGUP, KC_SPC
+                                                KC_TAB, LT(SYMB,KC_HOME), LT(MDIA,KC_END), LT(MDIA,KC_PGDN), LT(SYMB, KC_PGUP), KC_SPC
     ),
 
     [GAME] = LAYOUT_moonlander(
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [SYMB] = LAYOUT_moonlander(
-        VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,      CMB_TOG,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        VRSN,   KC_F1,     KC_F2,      KC_F3,      KC_F4,    KC_F5,    KC_ESC,      CM_TOGG,KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
         _______,KC_EXLM,   KC_AT,      KC_LCBR,    KC_RCBR,  KC_PIPE,  _______,     _______,KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
         _______,KC_HASH,   KC_DLR,     KC_LPRN,    KC_RPRN,  KC_GRV,   _______,     _______,KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, _______,
         _______,CTL_T(KC_PERC), ALT_T(KC_CIRC),KC_LBRC,KC_RBRC,KC_TILD,                     KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, _______,
@@ -79,14 +79,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (layer_state_is(GAME)) {
-        RGB_MATRIX_INDICATOR_SET_COLOR(16, 0xFF, 0x00, 0x00);  // E
-        RGB_MATRIX_INDICATOR_SET_COLOR(12, 0xFF, 0x00, 0x00);  // S
-        RGB_MATRIX_INDICATOR_SET_COLOR(17, 0xFF, 0x00, 0x00);  // D
-        RGB_MATRIX_INDICATOR_SET_COLOR(22, 0xFF, 0x00, 0x00);  // F
-        RGB_MATRIX_INDICATOR_SET_COLOR(32, 0xFF, 0x00, 0x00);  // Left thumb cluster
-        RGB_MATRIX_INDICATOR_SET_COLOR(33, 0xFF, 0x00, 0x00);  //
-        RGB_MATRIX_INDICATOR_SET_COLOR(34, 0xFF, 0x00, 0x00);  //
-        RGB_MATRIX_INDICATOR_SET_COLOR(35, 0xFF, 0x00, 0x00);  //
+        RGB_MATRIX_INDICATOR_SET_COLOR(16, 0x00, 0xC0, 0x50);  // E
+        RGB_MATRIX_INDICATOR_SET_COLOR(12, 0x00, 0xC0, 0x50);  // S
+        RGB_MATRIX_INDICATOR_SET_COLOR(17, 0x00, 0xC0, 0x50);  // D
+        RGB_MATRIX_INDICATOR_SET_COLOR(22, 0x00, 0xC0, 0x50);  // F
+        RGB_MATRIX_INDICATOR_SET_COLOR(32, 0x00, 0xC0, 0x50);  // Left thumb cluster
+        RGB_MATRIX_INDICATOR_SET_COLOR(33, 0x00, 0xC0, 0x50);  //
+        RGB_MATRIX_INDICATOR_SET_COLOR(34, 0x00, 0xC0, 0x50);  //
+        RGB_MATRIX_INDICATOR_SET_COLOR(35, 0x00, 0xC0, 0x50);  //
     }
     if (layer_state_is(SYMB)) {
         RGB_MATRIX_INDICATOR_SET_COLOR(5,  0xFF, 0x00, 0x7F);  // 1
@@ -149,7 +149,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 #endif
 
 
-void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
+void dance_lyr_finished(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
         if (layer_state_is(0)) {
@@ -163,15 +163,20 @@ void dance_lyr_finished(qk_tap_dance_state_t *state, void *user_data)
     }
 }
 
-void dance_lyr_reset(qk_tap_dance_state_t *state, void *user_data)
+void dance_lyr_reset(tap_dance_state_t *state, void *user_data)
 {}
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [DLFT] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
     [DRGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
     // Set the active layer with a tap dance.
     [DLAYR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lyr_finished, dance_lyr_reset)
 };
+
+void keyboard_post_init_user(void) {
+    // disable combos by default
+    combo_disable();
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
