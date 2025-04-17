@@ -18,7 +18,7 @@
 #pragma once
 
 //#define TAPPING_TERM_PER_KEY
-#define TAPPING_TERM 200
+#define TAPPING_TERM 190
 //#define PERMISSIVE_HOLD
 
 #define COMBO_VARIABLE_LEN
