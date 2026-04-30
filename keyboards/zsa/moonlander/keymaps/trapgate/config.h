@@ -17,6 +17,8 @@
 
 #pragma once
 
+// #define ORYX_CONFIGURATOR
+
 //#define TAPPING_TERM_PER_KEY
 #define TAPPING_TERM 190
 //#define PERMISSIVE_HOLD
